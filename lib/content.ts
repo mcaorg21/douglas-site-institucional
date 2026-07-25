@@ -192,7 +192,7 @@ export const contact = {
   sectionTitle: "Contato",
   subtitle: "Vamos conversar sobre seu negócio",
   text: "Cada situação empresarial é diferente. A melhor forma de entender a sua é por meio de uma conversa direta e sem compromisso.",
-  cta: "Fale com Douglas Figueredo pelo WhatsApp",
+  cta: "Fale comigo agora",
 };
 
 export const footer = {
