@@ -54,6 +54,7 @@ export default function AreasDeAtuacaoPage() {
             area={area}
             icon={practiceAreaIcons[area.slug]}
             reversed={index % 2 === 1}
+            isLast={index === practiceAreas.length - 1}
           />
         ))}
       </div>
