@@ -11,6 +11,7 @@ export const site = {
 };
 
 export const nav = [
+  { label: "Home", href: "/" },
   { label: "Sobre", href: "/sobre" },
   { label: "Áreas de Atuação", href: "/areas-de-atuacao" },
   { label: "Fale Comigo", href: site.whatsappHref, external: true },

@@ -13,7 +13,10 @@ export default function Home() {
       <StatsBar />
 
       <section className="border-b border-border bg-background">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 lg:grid-cols-[1fr_22rem]">
+        <div
+          data-scroll-reveal
+          className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 lg:grid-cols-[1fr_22rem]"
+        >
           <div className="max-w-2xl">
             <p className="text-sm tracking-wide text-muted-foreground uppercase">
               {about.sectionTitle}
@@ -54,7 +57,7 @@ export default function Home() {
       </section>
 
       <section className="bg-secondary">
-        <div className="mx-auto max-w-6xl px-6 py-24">
+        <div data-scroll-reveal className="mx-auto max-w-6xl px-6 py-24">
           <p className="text-sm tracking-wide text-muted-foreground uppercase">
             {practiceAreasSection.sectionTitle}
           </p>

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
+import { ArrowUpRight, Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { nav, site } from "@/lib/content";
@@ -38,12 +38,16 @@ function NavLink({
       target={item.external ? "_blank" : undefined}
       rel={item.external ? "noopener noreferrer" : undefined}
       className={cn(
-        "text-sm transition-colors hover:text-primary",
+        "group flex items-center justify-between text-sm transition-colors hover:text-primary",
         isActive ? "font-medium text-primary" : "text-foreground/80",
         className,
       )}
     >
-      {item.label}
+      <span>{item.label}</span>
+      <ArrowUpRight
+        aria-hidden="true"
+        className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+      />
     </Link>
   );
 }
@@ -120,16 +124,45 @@ export function Header() {
                 <Menu className="h-5 w-5" />
               </SheetTrigger>
               <SheetContent
-                className="inset-0 h-full w-full max-w-none origin-top-right border-none duration-300 ease-out data-ending-style:scale-0 data-ending-style:opacity-0 data-starting-style:scale-0 data-starting-style:opacity-0 sm:max-w-none data-[side=right]:inset-0 data-[side=right]:h-full data-[side=right]:w-full data-[side=right]:translate-x-0 data-[side=right]:border-l-0 data-[side=right]:sm:max-w-none"
+                className="inset-y-2 right-2 h-[calc(100%-1rem)] w-[calc(100%-1.5rem)] overflow-hidden rounded-3xl border border-border/70 bg-background/95 px-2 py-3 shadow-2xl backdrop-blur-xl duration-500 ease-out data-[side=right]:inset-y-2 data-[side=right]:right-2 data-[side=right]:h-[calc(100%-1rem)] data-[side=right]:w-[calc(100%-1.5rem)] data-[side=right]:data-ending-style:translate-x-full data-[side=right]:data-starting-style:translate-x-full sm:max-w-sm"
               >
-                <SheetHeader>
-                  <SheetTitle>{site.name}</SheetTitle>
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -top-24 -right-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl"
+                />
+
+                <SheetHeader className="relative border-b border-border/70 px-4 pt-3 pb-6">
+                  <Image
+                    src="/logos/logo_inline.png"
+                    alt=""
+                    width={1016}
+                    height={125}
+                    className="h-5 w-auto self-start"
+                  />
+                  <SheetTitle className="sr-only">{site.name}</SheetTitle>
+                  <p className="mt-4 max-w-60 text-sm leading-relaxed text-muted-foreground">
+                    {site.role}
+                  </p>
                 </SheetHeader>
-                <nav className="flex flex-col gap-6 px-4">
+
+                <nav className="relative flex flex-1 flex-col justify-center px-4">
                   {nav.map((item) => (
-                    <SheetClose key={item.label} render={<NavLink item={item} />} />
+                    <SheetClose
+                      key={item.label}
+                      nativeButton={false}
+                      render={
+                        <NavLink
+                          item={item}
+                          className="border-b border-border/70 py-5 font-heading text-xl last:border-b-0"
+                        />
+                      }
+                    />
                   ))}
                 </nav>
+
+                <p className="relative px-4 pb-3 text-xs tracking-wide text-muted-foreground uppercase">
+                  Advocacia empresarial estratégica
+                </p>
               </SheetContent>
             </Sheet>
           </div>

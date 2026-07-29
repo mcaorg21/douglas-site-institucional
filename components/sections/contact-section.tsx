@@ -4,7 +4,10 @@ import { Button } from "@/components/ui/button";
 export function ContactSection() {
   return (
     <section className="bg-primary text-primary-foreground">
-      <div className="mx-auto max-w-3xl px-6 py-24 text-center">
+      <div
+        data-scroll-reveal
+        className="mx-auto max-w-3xl px-6 py-24 text-center"
+      >
         <p className="text-sm tracking-wide text-primary-foreground/70 uppercase">
           {contact.sectionTitle}
         </p>
@@ -17,6 +20,7 @@ export function ContactSection() {
 
         <Button
           size="lg"
+          nativeButton={false}
           className="mt-10 h-12 bg-primary-foreground px-8 text-base text-primary hover:bg-primary-foreground/90"
           render={
             <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer" />

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { practiceAreas, practiceAreasSection } from "@/lib/content";
-import { practiceAreaIcons } from "@/lib/practice-area-icons";
 import { PracticeAreaParallaxRow } from "@/components/sections/practice-area-parallax";
+import { ContactSection } from "@/components/sections/contact-section";
 
 export const metadata: Metadata = {
   title: "Áreas de Atuação | Douglas Figueredo",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function AreasDeAtuacaoPage() {
   return (
     <div>
-      <div className="relative flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden text-center">
+      <div className="relative flex min-h-[calc(100svh-4rem)] w-full flex-col items-center justify-center overflow-hidden text-center md:min-h-[80vh]">
         <Image
           src="/images/background_area.png"
           alt=""
@@ -27,7 +27,7 @@ export default function AreasDeAtuacaoPage() {
           <p className="text-sm tracking-wide text-muted-foreground uppercase">
             {practiceAreasSection.sectionTitle}
           </p>
-          <h1 className="mt-4 font-heading text-4xl text-foreground md:text-6xl">
+          <h1 className="mt-4 font-heading text-4xl text-primary md:text-6xl">
             {practiceAreasSection.intro}
           </h1>
           <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
@@ -52,12 +52,12 @@ export default function AreasDeAtuacaoPage() {
           <PracticeAreaParallaxRow
             key={area.slug}
             area={area}
-            icon={practiceAreaIcons[area.slug]}
             reversed={index % 2 === 1}
-            isLast={index === practiceAreas.length - 1}
           />
         ))}
       </div>
+
+      <ContactSection />
     </div>
   );
 }
