@@ -72,17 +72,17 @@ export function Header() {
     <>
       <header
         className={cn(
-          "z-40 w-full transition-colors",
+          "fixed inset-x-0 top-0 z-40 w-full transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-out",
           transparent
-            ? "absolute inset-x-0 top-0 bg-transparent"
-            : "fixed inset-x-0 top-0 border-b border-border bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/80",
+            ? "border-b border-transparent bg-transparent shadow-none"
+            : "border-b border-border bg-background/95 shadow-sm backdrop-blur supports-backdrop-filter:bg-background/80",
         )}
       >
         <div className="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6">
           <Link
             href="/"
             className={cn(
-              "flex items-center gap-2 font-heading text-lg tracking-tight",
+              "flex items-center gap-2 font-heading text-lg tracking-tight transition-colors duration-500",
               transparent ? "text-white" : "text-primary",
             )}
           >
@@ -168,7 +168,7 @@ export function Header() {
           </div>
         </div>
       </header>
-      {!transparent && <div aria-hidden="true" className="h-16 w-full" />}
+      {!isHome && <div aria-hidden="true" className="h-16 w-full" />}
     </>
   );
 }

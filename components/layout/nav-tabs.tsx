@@ -44,15 +44,16 @@ export function NavTabs({ variant = "dark" }: { variant?: "light" | "dark" }) {
   }, [activeIndex]);
 
   React.useEffect(() => {
-    snapToActive();
+    const frame = window.requestAnimationFrame(snapToActive);
+    return () => window.cancelAnimationFrame(frame);
   }, [snapToActive]);
 
   return (
     <ul
       onMouseLeave={snapToActive}
       className={cn(
-        "relative hidden items-center p-1 md:flex",
-        isLight && "rounded-full border-2 border-white bg-transparent",
+        "relative hidden items-center rounded-full border-2 border-transparent bg-transparent p-1 transition-[background-color,border-color] duration-500 md:flex",
+        isLight && "border-white",
       )}
     >
       {nav.map((item, i) => {
@@ -96,7 +97,7 @@ export function NavTabs({ variant = "dark" }: { variant?: "light" | "dark" }) {
       <motion.li
         animate={{ ...position }}
         className={cn(
-          "absolute top-1 z-0 h-9 rounded-full",
+          "absolute top-1 z-0 h-9 rounded-full transition-colors duration-500",
           isLight ? "bg-white" : "bg-primary",
         )}
       />
