@@ -37,7 +37,20 @@ export function PracticeAreaParallaxRow({
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="flex w-[200%] items-stretch"
           >
-            <div className="min-w-0 w-1/2 shrink-0 bg-background p-7">
+            <div
+              role="button"
+              tabIndex={0}
+              aria-expanded={isOpen}
+              aria-controls={servicesId}
+              onClick={() => setIsOpen(true)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setIsOpen(true);
+                }
+              }}
+              className="min-w-0 w-1/2 shrink-0 cursor-pointer bg-background p-7"
+            >
               <h3 className="break-words font-heading text-3xl text-primary [overflow-wrap:anywhere]">
                 {area.title}
               </h3>
@@ -45,30 +58,30 @@ export function PracticeAreaParallaxRow({
                 &ldquo;{area.quote}&rdquo;
               </p>
 
-              <button
-                type="button"
-                aria-expanded={isOpen}
-                aria-controls={servicesId}
-                onClick={() => setIsOpen(true)}
-                className="mt-7 flex cursor-pointer items-center gap-3 text-sm font-medium text-primary transition-colors hover:text-primary/70"
-              >
+              <div className="mt-7 flex items-center gap-3 text-sm font-medium text-primary transition-colors">
                 <span>Ver serviços</span>
                 <ChevronRight aria-hidden="true" className="h-5 w-5" />
-              </button>
+              </div>
             </div>
 
             <div
               id={servicesId}
-              className="min-w-0 w-1/2 shrink-0 bg-primary p-7 text-primary-foreground"
+              role="button"
+              tabIndex={0}
+              aria-label={`Voltar para ${area.title}`}
+              onClick={() => setIsOpen(false)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setIsOpen(false);
+                }
+              }}
+              className="min-w-0 w-1/2 shrink-0 cursor-pointer bg-primary p-7 text-primary-foreground"
             >
-              <button
-                type="button"
-                onClick={() => setIsOpen(false)}
-                className="flex cursor-pointer items-center gap-2 text-sm font-medium text-primary-foreground/80 transition-colors hover:text-primary-foreground"
-              >
+              <div className="flex items-center gap-2 text-sm font-medium text-primary-foreground/80 transition-colors">
                 <ChevronLeft aria-hidden="true" className="h-5 w-5" />
                 <span>Voltar</span>
-              </button>
+              </div>
 
               <p className="mt-8 font-heading text-2xl">Serviços</p>
               <Separator className="my-5 bg-primary-foreground/25" />

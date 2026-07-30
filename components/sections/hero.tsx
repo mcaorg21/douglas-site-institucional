@@ -18,12 +18,12 @@ export function Hero() {
         <div className="absolute inset-0 bg-primary/50 md:bg-primary/10" />
       </div>
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-24 md:py-32">
-        <p className="text-sm tracking-wide text-primary-foreground/70 uppercase">
-          {hero.identity}
-        </p>
-        <h1 className="mt-4 max-w-3xl font-heading text-4xl leading-tight md:text-6xl">
+        <h1 className="max-w-3xl font-heading text-4xl leading-tight md:text-6xl">
           {hero.title}
         </h1>
+        <p className="mt-4 text-sm tracking-wide text-primary-foreground/70 uppercase">
+          {hero.identity}
+        </p>
         <p className="mt-8 max-w-2xl text-base text-primary-foreground/80 md:text-lg">
           {hero.highlight}
         </p>

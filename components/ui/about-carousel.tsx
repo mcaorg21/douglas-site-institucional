@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -63,7 +63,7 @@ export function AboutCarousel({
 
   return (
     <section data-scroll-reveal aria-label="Tópicos sobre Douglas Figueredo">
-      <div className="mb-6 flex items-end justify-between gap-4">
+      <div className="mb-6">
         <div>
           <p className="text-sm tracking-wide text-muted-foreground uppercase">
             Perfil profissional
@@ -73,39 +73,17 @@ export function AboutCarousel({
           </h2>
         </div>
 
-        <div className="hidden gap-2 sm:flex">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            aria-label="Tópico anterior"
-            disabled={activeIndex === 0}
-            onClick={() => goToSlide(activeIndex - 1)}
-          >
-            <ChevronLeft aria-hidden="true" className="h-5 w-5" />
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            aria-label="Próximo tópico"
-            disabled={activeIndex === topics.length - 1}
-            onClick={() => goToSlide(activeIndex + 1)}
-          >
-            <ChevronRight aria-hidden="true" className="h-5 w-5" />
-          </Button>
-        </div>
       </div>
 
       <div
         ref={carouselRef}
         onScroll={handleScroll}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex touch-pan-x snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {topics.map((topic, index) => (
           <article
             key={topic.title}
-            className="min-w-full snap-start rounded-2xl border border-border bg-background p-6 shadow-sm md:p-10"
+            className="relative min-w-[85%] snap-start rounded-2xl border border-border bg-background p-6 shadow-sm md:min-w-full md:p-10 md:pr-20"
           >
             <div className="flex items-start justify-between gap-5 border-b border-border pb-6">
               <div>
@@ -138,11 +116,23 @@ export function AboutCarousel({
                 </li>
               ))}
             </ul>
+
+            <Button
+              type="button"
+              variant="outline"
+              size="icon"
+              aria-label="Próximo tópico"
+              disabled={index === topics.length - 1}
+              onClick={() => goToSlide(index + 1)}
+              className="pointer-events-auto absolute top-1/2 right-6 z-20 hidden -translate-y-1/2 bg-background shadow-sm md:inline-flex"
+            >
+              <ChevronRight aria-hidden="true" className="h-5 w-5" />
+            </Button>
           </article>
         ))}
       </div>
 
-      <div className="mt-3 flex items-center justify-between gap-4">
+      <div className="mt-3 flex items-center">
         <div className="flex gap-2" aria-label="Selecionar tópico">
           {topics.map((topic, index) => (
             <button
@@ -159,28 +149,6 @@ export function AboutCarousel({
           ))}
         </div>
 
-        <div className="flex gap-2 sm:hidden">
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            aria-label="Tópico anterior"
-            disabled={activeIndex === 0}
-            onClick={() => goToSlide(activeIndex - 1)}
-          >
-            <ChevronLeft aria-hidden="true" className="h-5 w-5" />
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            size="icon"
-            aria-label="Próximo tópico"
-            disabled={activeIndex === topics.length - 1}
-            onClick={() => goToSlide(activeIndex + 1)}
-          >
-            <ChevronRight aria-hidden="true" className="h-5 w-5" />
-          </Button>
-        </div>
       </div>
     </section>
   );

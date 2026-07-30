@@ -52,17 +52,19 @@ export default function SobrePage() {
     <article>
       <header
         data-scroll-reveal
-        className="mx-auto max-w-6xl px-6 pt-20 pb-14 md:pt-28 md:pb-20"
+        className="bg-primary text-primary-foreground"
       >
-        <p className="text-sm tracking-wide text-muted-foreground uppercase">
-          {about.sectionTitle}
-        </p>
-        <h1 className="mt-4 max-w-3xl font-heading text-4xl text-foreground md:text-5xl">
-          {about.subtitle}
-        </h1>
-        <p className="mt-8 max-w-3xl text-lg leading-relaxed text-foreground/85">
-          {about.intro}
-        </p>
+        <div className="mx-auto max-w-6xl px-6 pt-20 pb-14 md:pt-28 md:pb-20">
+          <p className="text-sm tracking-wide text-primary-foreground/70 uppercase">
+            {about.sectionTitle}
+          </p>
+          <h1 className="mt-4 max-w-3xl font-heading text-4xl text-primary-foreground md:text-5xl">
+            {about.subtitle}
+          </h1>
+          <p className="mt-8 max-w-3xl text-lg leading-relaxed text-primary-foreground/85">
+            {about.intro}
+          </p>
+        </div>
       </header>
 
       <div className="border-y border-border bg-secondary/50">
