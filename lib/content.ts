@@ -1,8 +1,9 @@
 export const site = {
   name: "Douglas Figueredo",
   role: "Advogado · Professor · Direito Empresarial",
-  whatsapp: "+55XXXXXXXXXXX",
-  whatsappHref: "https://wa.me/55XXXXXXXXXXX",
+  whatsapp: "(31) 2094-0233",
+  whatsappHref:
+    "https://wa.me/553120940233?text=Oi%2C%20estava%20no%20seu%20site%20e%20tenho%20algumas%20d%C3%BAvidas",
   email: "contato@figueredoadv.com.br",
   instagram: {
     handle: "@figueredoadv",
