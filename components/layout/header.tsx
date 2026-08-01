@@ -78,7 +78,10 @@ export function Header() {
         pathname === "/" ||
         pathname === "/sobre" ||
         pathname === "/areas-de-atuacao";
-      setCompactOnStory(compactWhileScrolling && window.scrollY > 64);
+      const compactThreshold = pathname === "/" ? 10 : 64;
+      setCompactOnStory(
+        compactWhileScrolling && window.scrollY > compactThreshold,
+      );
     };
 
     updateCompactState();
