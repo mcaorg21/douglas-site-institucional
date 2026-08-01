@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { practiceAreas, practiceAreasSection } from "@/lib/content";
 import { PracticeAreaParallaxRow } from "@/components/sections/practice-area-parallax";
+import { PracticeAreasMobileSlider } from "@/components/sections/practice-areas-mobile-slider";
 import { ContactSection } from "@/components/sections/contact-section";
 
 export const metadata: Metadata = {
@@ -35,7 +36,7 @@ export default function AreasDeAtuacaoPage() {
           </p>
 
           <a
-            href={`#${practiceAreas[0].slug}`}
+            href="#lista-areas-de-atuacao"
             aria-label="Ver áreas de atuação"
             className="mt-16 cursor-pointer"
           >
@@ -47,14 +48,18 @@ export default function AreasDeAtuacaoPage() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-6 pb-20">
-        {practiceAreas.map((area, index) => (
-          <PracticeAreaParallaxRow
-            key={area.slug}
-            area={area}
-            reversed={index % 2 === 1}
-          />
-        ))}
+      <div id="lista-areas-de-atuacao" className="scroll-mt-16">
+        <PracticeAreasMobileSlider areas={practiceAreas} />
+
+        <div className="mx-auto hidden max-w-6xl px-6 pb-20 md:block">
+          {practiceAreas.map((area, index) => (
+            <PracticeAreaParallaxRow
+              key={area.slug}
+              area={area}
+              reversed={index % 2 === 1}
+            />
+          ))}
+        </div>
       </div>
 
       <ContactSection />
