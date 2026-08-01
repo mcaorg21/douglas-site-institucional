@@ -69,23 +69,9 @@ export default function SobrePage() {
 
       <div className="border-y border-border bg-secondary/50">
         <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
-          <AboutCarousel topics={topics} />
+          <AboutCarousel topics={topics} quote={about.quote} />
         </div>
       </div>
-
-      <blockquote
-        data-scroll-reveal
-        className="mx-auto my-20 max-w-4xl px-6 md:my-28"
-      >
-        <div className="rounded-2xl bg-primary p-8 text-primary-foreground md:p-12">
-          <p className="font-heading text-2xl leading-relaxed md:text-3xl">
-            &ldquo;{about.quote.text}&rdquo;
-          </p>
-          <footer className="mt-5 text-sm text-primary-foreground/70">
-            {about.quote.author}
-          </footer>
-        </div>
-      </blockquote>
     </article>
   );
 }

@@ -46,10 +46,10 @@ export default function Home() {
           </div>
 
           <Image
-            src="/images/douglas_primeira_pagina_v2.png"
+            src="/images/douglas_primeira_pagina_v3.png"
             alt="Douglas Figueredo"
-            width={1296}
-            height={1137}
+            width={1165}
+            height={1014}
             className="mx-auto w-full max-w-sm"
             sizes="22rem"
           />

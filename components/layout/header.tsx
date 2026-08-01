@@ -56,6 +56,7 @@ export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
+  const [compactOnStory, setCompactOnStory] = useState(false);
 
   useEffect(() => {
     if (!isHome) return;
@@ -65,6 +66,30 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome]);
+
+  useEffect(() => {
+    const updateCompactState = () => {
+      if (window.innerWidth >= 768) {
+        setCompactOnStory(false);
+        return;
+      }
+
+      const compactWhileScrolling =
+        pathname === "/" ||
+        pathname === "/sobre" ||
+        pathname === "/areas-de-atuacao";
+      setCompactOnStory(compactWhileScrolling && window.scrollY > 64);
+    };
+
+    updateCompactState();
+    window.addEventListener("scroll", updateCompactState, { passive: true });
+    window.addEventListener("resize", updateCompactState);
+
+    return () => {
+      window.removeEventListener("scroll", updateCompactState);
+      window.removeEventListener("resize", updateCompactState);
+    };
+  }, [pathname]);
 
   const transparent = isHome && !scrolled;
 
@@ -76,14 +101,22 @@ export function Header() {
           transparent
             ? "border-b border-transparent bg-transparent shadow-none"
             : "border-b border-border bg-background/95 shadow-sm backdrop-blur supports-backdrop-filter:bg-background/80",
+          compactOnStory &&
+            "inset-x-auto top-4 right-4 h-12 w-12 rounded-full border border-border bg-background/95 shadow-lg backdrop-blur",
         )}
       >
-        <div className="mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6">
+        <div
+          className={cn(
+            "mx-auto grid h-16 max-w-6xl grid-cols-[1fr_auto_1fr] items-center px-6",
+            compactOnStory && "h-12 w-12 grid-cols-1 px-0",
+          )}
+        >
           <Link
             href="/"
             className={cn(
               "flex items-center gap-2 font-heading text-lg tracking-tight transition-colors duration-500",
               transparent ? "text-white" : "text-primary",
+              compactOnStory && "hidden",
             )}
           >
             <Image
@@ -103,11 +136,16 @@ export function Header() {
             <span className="hidden md:inline">{site.name}</span>
           </Link>
 
-          <div className="flex justify-center">
+          <div className={cn("flex justify-center", compactOnStory && "hidden")}>
             <NavTabs variant={transparent ? "light" : "dark"} />
           </div>
 
-          <div className="flex justify-end md:hidden">
+          <div
+            className={cn(
+              "flex justify-end md:hidden",
+              compactOnStory && "justify-center",
+            )}
+          >
             <Sheet>
               <SheetTrigger
                 render={
