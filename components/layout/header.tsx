@@ -55,22 +55,42 @@ function NavLink({
 export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isSobre = pathname === "/sobre";
   const [scrolled, setScrolled] = useState(false);
   const [compactOnStory, setCompactOnStory] = useState(false);
 
   useEffect(() => {
-    if (!isHome) return;
+    if (!isHome && !isSobre) return;
 
-    const onScroll = () => setScrolled(window.scrollY > 10);
+    const onScroll = () => {
+      const threshold = isSobre
+        ? Math.max(64, window.innerHeight * 0.65)
+        : 10;
+      setScrolled(window.scrollY > threshold);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [isHome]);
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [isHome, isSobre]);
 
   useEffect(() => {
     const updateCompactState = () => {
       if (window.innerWidth >= 768) {
-        setCompactOnStory(false);
+        const compactOnDesktop =
+          pathname === "/" ||
+          pathname === "/sobre" ||
+          pathname === "/areas-de-atuacao";
+
+        if (!compactOnDesktop) {
+          setCompactOnStory(false);
+          return;
+        }
+
+        setCompactOnStory(window.scrollY > 10);
         return;
       }
 
@@ -94,18 +114,16 @@ export function Header() {
     };
   }, [pathname]);
 
-  const transparent = isHome && !scrolled;
+  const transparent = (isHome || isSobre) && !scrolled;
 
   return (
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-40 w-full transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-out",
-          transparent
-            ? "border-b border-transparent bg-transparent shadow-none"
-            : "border-b border-border bg-background/95 shadow-sm backdrop-blur supports-backdrop-filter:bg-background/80",
+          "fixed top-0 right-0 z-40 w-full transition-all duration-500 ease-out",
+          "border-b border-transparent bg-transparent shadow-none",
           compactOnStory &&
-            "inset-x-auto top-4 right-4 h-12 w-12 rounded-full border border-border bg-background/95 shadow-lg backdrop-blur",
+            "top-4 right-4 h-12 w-12 rounded-full border border-border bg-background/95 shadow-lg backdrop-blur",
         )}
       >
         <div
@@ -145,8 +163,8 @@ export function Header() {
 
           <div
             className={cn(
-              "flex justify-end md:hidden",
-              compactOnStory && "justify-center",
+              "flex justify-end",
+              compactOnStory ? "justify-center md:flex" : "md:hidden",
             )}
           >
             <Sheet>
@@ -157,7 +175,9 @@ export function Header() {
                     size="icon"
                     aria-label="Abrir menu"
                     className={
-                      transparent ? "text-white hover:bg-white/10 hover:text-white" : undefined
+                      transparent && !compactOnStory
+                        ? "text-white hover:bg-white/10 hover:text-white"
+                        : undefined
                     }
                   />
                 }
@@ -209,7 +229,7 @@ export function Header() {
           </div>
         </div>
       </header>
-      {!isHome && <div aria-hidden="true" className="h-16 w-full" />}
+      {!isHome && !isSobre && <div aria-hidden="true" className="h-16 w-full" />}
     </>
   );
 }

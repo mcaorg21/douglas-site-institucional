@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { ArrowLeft, ArrowUpRight, X } from "lucide-react";
 
 import type { PracticeArea } from "@/lib/content";
@@ -51,21 +52,34 @@ export function PracticeAreasMobileSlider({
             key={area.slug}
             onClick={() => setSelectedArea(area)}
             aria-label={`Ver detalhes de ${area.title}`}
-            className="flex h-[28rem] w-[calc(100vw-3.5rem)] shrink-0 cursor-pointer flex-col rounded-2xl border border-border bg-primary p-7 text-left text-primary-foreground shadow-sm"
+            className="relative flex h-[28rem] w-[calc(100vw-3.5rem)] shrink-0 cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-primary p-7 text-left text-primary-foreground shadow-sm"
           >
-            <p className="text-xs font-bold tracking-[0.2em] uppercase opacity-60">
+            <Image
+              src={area.image}
+              alt=""
+              fill
+              loading={index === 0 ? "eager" : "lazy"}
+              sizes="calc(100vw - 3.5rem)"
+              className="pointer-events-none object-cover opacity-65 grayscale"
+            />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-primary/55"
+            />
+
+            <p className="relative z-10 text-xs font-bold tracking-[0.2em] uppercase opacity-60">
               {String(index + 1).padStart(2, "0")} /{" "}
               {String(areas.length).padStart(2, "0")}
             </p>
 
-            <h2 className="mt-6 break-words font-heading text-3xl leading-tight [overflow-wrap:anywhere]">
+            <h2 className="relative z-10 mt-6 break-words font-heading text-3xl leading-tight [overflow-wrap:anywhere]">
               {area.title}
             </h2>
-            <p className="mt-4 text-base leading-relaxed italic opacity-75">
+            <p className="relative z-10 mt-4 text-base leading-relaxed italic opacity-75">
               &ldquo;{area.quote}&rdquo;
             </p>
 
-            <span className="mt-auto flex items-center gap-2 text-sm font-medium">
+            <span className="relative z-10 mt-auto flex items-center gap-2 text-sm font-medium">
               Ver detalhes
               <ArrowUpRight aria-hidden="true" className="h-5 w-5" />
             </span>
@@ -132,7 +146,7 @@ export function PracticeAreasMobileSlider({
               className="mt-8 flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-primary-foreground"
             >
               <ArrowLeft aria-hidden="true" className="h-4 w-4" />
-              Voltar aos cards
+              Voltar
             </button>
           </section>
         </div>

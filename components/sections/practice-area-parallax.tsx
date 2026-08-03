@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -123,11 +124,23 @@ export function PracticeAreaParallaxRow({
         }}
         style={{ transformOrigin: "top center", transformStyle: "preserve-3d" }}
         className={cn(
-          "hidden min-w-0 aspect-square overflow-hidden rounded-2xl bg-primary md:flex",
+          "relative hidden min-w-0 aspect-square overflow-hidden rounded-2xl bg-primary md:flex",
           reversed && "lg:order-1",
         )}
       >
-        <div className="h-full w-full overflow-y-auto px-8 pt-16 pb-8 text-primary-foreground">
+        <Image
+          src={area.image}
+          alt=""
+          fill
+          sizes="(min-width: 1152px) 512px, 50vw"
+          className="pointer-events-none object-cover opacity-65 grayscale"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-primary/55"
+        />
+
+        <div className="relative z-10 h-full w-full overflow-y-auto px-8 pt-16 pb-8 text-primary-foreground">
           <p className="font-heading text-xl text-primary-foreground">
             Serviços
           </p>

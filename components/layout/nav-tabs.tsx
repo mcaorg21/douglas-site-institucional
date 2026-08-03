@@ -52,8 +52,8 @@ export function NavTabs({ variant = "dark" }: { variant?: "light" | "dark" }) {
     <ul
       onMouseLeave={snapToActive}
       className={cn(
-        "relative hidden items-center rounded-full border-2 border-transparent bg-transparent p-1 transition-[background-color,border-color] duration-500 md:flex",
-        isLight && "border-white",
+        "relative hidden items-center rounded-full border-0 p-1 shadow-lg backdrop-blur-md transition-[background-color,box-shadow] duration-500 md:flex",
+        isLight ? "bg-white/10" : "bg-background/95",
       )}
     >
       {nav.map((item, i) => {

@@ -90,6 +90,7 @@ export type PracticeArea = {
   slug: string;
   title: string;
   quote: string;
+  image: string;
   services: string[];
 };
 
@@ -102,6 +103,7 @@ export const practiceAreasSection = {
 export const practiceAreas: PracticeArea[] = [
   {
     slug: "governanca-societaria-e-acordo-de-socios",
+    image: "/images/practice-areas/governanca.jpg",
     title: "Governança Societária e Acordo de Sócios",
     quote:
       "A maioria das brigas entre sócios começa antes da empresa dar certo. A estrutura certa evita isso.",
@@ -115,6 +117,7 @@ export const practiceAreas: PracticeArea[] = [
   },
   {
     slug: "contratos-estrategicos-e-gestao-de-risco",
+    image: "/images/practice-areas/contratos.jpg",
     title: "Contratos Estratégicos e Gestão de Risco",
     quote:
       "O que você assina hoje define o que você pode exigir amanhã. Contrato ruim só serve quando tudo vai bem.",
@@ -130,6 +133,7 @@ export const practiceAreas: PracticeArea[] = [
   },
   {
     slug: "compliance-regulatorio-setorial",
+    image: "/images/practice-areas/compliance-v2.jpg",
     title: "Compliance Regulatório Setorial",
     quote:
       "Cada setor tem suas próprias regras — e seus próprios riscos. Compliance genérico não protege empresa nenhuma.",
@@ -145,6 +149,7 @@ export const practiceAreas: PracticeArea[] = [
   },
   {
     slug: "reestruturacao-societaria-e-ma",
+    image: "/images/practice-areas/reestruturacao.jpg",
     title: "Reestruturação Societária e M&A",
     quote:
       "Fusão, aquisição ou reorganização mal estruturada custa caro depois. O trabalho sério é feito antes de assinar.",
@@ -161,6 +166,7 @@ export const practiceAreas: PracticeArea[] = [
   },
   {
     slug: "sucessao-empresarial-e-planejamento-patrimonial",
+    image: "/images/practice-areas/sucessao-v2.jpg",
     title: "Sucessão Empresarial e Planejamento Patrimonial",
     quote:
       "Sucessão mal planejada não poupa a família de conflito — ela garante que ele aconteça na pior hora.",
@@ -176,6 +182,7 @@ export const practiceAreas: PracticeArea[] = [
   },
   {
     slug: "presenca-no-conselho-de-administracao",
+    image: "/images/practice-areas/conselho.jpg",
     title: "Presença no Conselho de Administração",
     quote:
       "Uma decisão de conselho mal assessorada pode custar mais caro que qualquer processo. O jurídico precisa estar na sala ouvindo a discussão — não apenas no contrato, depois que a decisão já foi tomada.",

@@ -9,6 +9,12 @@ export type AboutCarouselTopic = {
   items: string[];
 };
 
+const cardPalettes = [
+  "bg-background text-foreground",
+  "bg-primary text-primary-foreground",
+  "bg-secondary text-secondary-foreground",
+];
+
 export function AboutCarousel({
   topics,
   quote,
@@ -39,9 +45,7 @@ export function AboutCarousel({
             aria-label={topic.title}
             className={cn(
               "min-h-[75svh] border border-border",
-              index % 2 === 0
-                ? "bg-primary text-primary-foreground"
-                : "bg-background text-foreground",
+              cardPalettes[index % cardPalettes.length],
             )}
           >
             <p className="text-xs font-bold tracking-[0.2em] uppercase opacity-70">
@@ -87,7 +91,10 @@ export function AboutCarousel({
 
         <FlowSection
           aria-label="Citação de Douglas Figueredo"
-          className="min-h-[75svh] border border-border bg-primary text-primary-foreground"
+          className={cn(
+            "min-h-[75svh] border border-border",
+            cardPalettes[topics.length % cardPalettes.length],
+          )}
         >
           <p className="text-xs font-bold tracking-[0.2em] uppercase opacity-70">
             {String(totalCards).padStart(2, "0")} — Princípio
