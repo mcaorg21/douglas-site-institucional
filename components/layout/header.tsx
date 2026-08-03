@@ -56,11 +56,12 @@ export function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const isSobre = pathname === "/sobre";
+  const isAreas = pathname === "/areas-de-atuacao";
   const [scrolled, setScrolled] = useState(false);
   const [compactOnStory, setCompactOnStory] = useState(false);
 
   useEffect(() => {
-    if (!isHome && !isSobre) return;
+    if (!isHome && !isSobre && !isAreas) return;
 
     const onScroll = () => {
       const threshold = isSobre
@@ -75,7 +76,7 @@ export function Header() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [isHome, isSobre]);
+  }, [isAreas, isHome, isSobre]);
 
   useEffect(() => {
     const updateCompactState = () => {
@@ -94,14 +95,12 @@ export function Header() {
         return;
       }
 
-      const compactWhileScrolling =
+      const compactOnMobile =
         pathname === "/" ||
         pathname === "/sobre" ||
         pathname === "/areas-de-atuacao";
-      const compactThreshold = pathname === "/" ? 10 : 64;
-      setCompactOnStory(
-        compactWhileScrolling && window.scrollY > compactThreshold,
-      );
+
+      setCompactOnStory(compactOnMobile && window.scrollY > 10);
     };
 
     updateCompactState();
@@ -115,15 +114,18 @@ export function Header() {
   }, [pathname]);
 
   const transparent = (isHome || isSobre) && !scrolled;
+  const transparentOnMobile = transparent || (isAreas && !scrolled);
 
   return (
     <>
       <header
         className={cn(
           "fixed top-0 right-0 z-40 w-full transition-all duration-500 ease-out",
-          "border-b border-transparent bg-transparent shadow-none",
+          transparentOnMobile
+            ? "border-b border-transparent bg-transparent shadow-none"
+            : "border-b border-border bg-background/95 shadow-sm backdrop-blur supports-backdrop-filter:bg-background/80 md:border-transparent md:bg-transparent md:shadow-none md:backdrop-blur-none",
           compactOnStory &&
-            "top-4 right-4 h-12 w-12 rounded-full border border-border bg-background/95 shadow-lg backdrop-blur",
+            "top-4 right-4 left-auto h-12 w-12 rounded-full border !border-border !bg-background/95 shadow-lg backdrop-blur md:shadow-lg md:backdrop-blur",
         )}
       >
         <div
@@ -145,7 +147,10 @@ export function Header() {
               alt={site.name}
               width={1016}
               height={125}
-              className={cn("h-5 w-auto md:hidden", transparent && "invert")}
+              className={cn(
+                "h-5 w-auto md:hidden",
+                transparent && "invert",
+              )}
             />
             <Image
               src="/logos/logo_header.png"
@@ -177,6 +182,8 @@ export function Header() {
                     className={
                       transparent && !compactOnStory
                         ? "text-white hover:bg-white/10 hover:text-white"
+                        : isAreas && !compactOnStory
+                          ? "text-primary hover:bg-primary/10 hover:text-primary"
                         : undefined
                     }
                   />
@@ -229,7 +236,12 @@ export function Header() {
           </div>
         </div>
       </header>
-      {!isHome && !isSobre && <div aria-hidden="true" className="h-16 w-full" />}
+      {!isHome && !isSobre && !isAreas && (
+        <div aria-hidden="true" className="h-16 w-full" />
+      )}
+      {isAreas && (
+        <div aria-hidden="true" className="hidden h-16 w-full md:block" />
+      )}
     </>
   );
 }
