@@ -15,7 +15,7 @@ export function Hero() {
           sizes="100vw"
           className="animate-hero-zoom object-cover object-[78%_center] md:object-center"
         />
-        <div className="absolute inset-0 bg-primary/50 md:bg-primary/10" />
+        <div className="absolute inset-0 bg-[#04223c]/70 md:bg-transparent" />
       </div>
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-24 md:py-32">
         <h1 className="max-w-3xl font-heading text-4xl leading-tight md:text-6xl">

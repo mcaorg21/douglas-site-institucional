@@ -4,7 +4,7 @@ export const site = {
   whatsapp: "(31) 2094-0233",
   whatsappHref:
     "https://wa.me/553120940233?text=Oi%2C%20estava%20no%20seu%20site%20e%20tenho%20algumas%20d%C3%BAvidas",
-  email: "contato@figueredoadv.com.br",
+  email: "contato@figueredo.adv.br",
   instagram: {
     handle: "@figueredoadv",
     href: "https://instagram.com/figueredoadv",

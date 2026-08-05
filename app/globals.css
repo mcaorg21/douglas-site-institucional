@@ -165,6 +165,21 @@
   animation: hero-zoom 20s ease-out forwards;
 }
 
+@keyframes hero-pan-desktop {
+  from {
+    transform: scale(1.01) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.14) translate3d(-1.5%, 0, 0);
+  }
+}
+
+@media (min-width: 48rem) {
+  .animate-hero-zoom {
+    animation: hero-pan-desktop 16s ease-out forwards;
+  }
+}
+
 @keyframes arrow-blink {
   0%,
   100% {

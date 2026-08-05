@@ -58,7 +58,11 @@ export function PracticeAreasMobileSlider({
               src={area.image}
               alt=""
               fill
-              loading={index === 0 ? "eager" : "lazy"}
+              loading={
+                index === 0 || area.slug === "reestruturacao-societaria-e-ma"
+                  ? "eager"
+                  : "lazy"
+              }
               sizes="calc(100vw - 3.5rem)"
               className="pointer-events-none object-cover opacity-65 grayscale"
             />

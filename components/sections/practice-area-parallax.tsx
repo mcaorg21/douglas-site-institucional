@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import type { PracticeArea } from "@/lib/content";
@@ -17,7 +17,13 @@ export function PracticeAreaParallaxRow({
   reversed?: boolean;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const desktopCardRef = useRef<HTMLDivElement>(null);
   const servicesId = `${area.slug}-servicos`;
+  const { scrollYProgress } = useScroll({
+    target: desktopCardRef,
+    offset: ["start end", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["8%", "-8%"]);
 
   return (
     <div
@@ -114,6 +120,7 @@ export function PracticeAreaParallaxRow({
       </motion.div>
 
       <motion.div
+        ref={desktopCardRef}
         initial={{ opacity: 0, rotateX: -28, y: 64 }}
         whileInView={{ opacity: 1, rotateX: 0, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -128,13 +135,22 @@ export function PracticeAreaParallaxRow({
           reversed && "lg:order-1",
         )}
       >
-        <Image
-          src={area.image}
-          alt=""
-          fill
-          sizes="(min-width: 1152px) 512px, 50vw"
-          className="pointer-events-none object-cover opacity-65 grayscale"
-        />
+        <motion.div
+          aria-hidden="true"
+          style={{ y: imageY }}
+          className="pointer-events-none absolute inset-x-0 -inset-y-[10%]"
+        >
+          <Image
+            src={area.image}
+            alt=""
+            fill
+            loading={
+              area.slug === "reestruturacao-societaria-e-ma" ? "eager" : "lazy"
+            }
+            sizes="(min-width: 1152px) 512px, 50vw"
+            className="object-cover opacity-65 grayscale"
+          />
+        </motion.div>
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-primary/55"
