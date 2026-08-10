@@ -52,9 +52,9 @@ export default function SobrePage() {
     <article>
       <header
         data-scroll-reveal
-        className="bg-primary text-primary-foreground"
+        className="relative overflow-hidden bg-primary text-primary-foreground"
       >
-        <div className="mx-auto max-w-6xl px-6 pt-20 pb-14 md:pt-28 md:pb-20">
+        <div className="relative z-10 mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-28 md:pb-32">
           <p className="text-sm tracking-wide text-primary-foreground/70 uppercase">
             {about.sectionTitle}
           </p>
@@ -65,9 +65,18 @@ export default function SobrePage() {
             {about.intro}
           </p>
         </div>
+
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 160"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-20 w-full fill-secondary md:h-28"
+        >
+          <path d="M0 118C220 146 420 78 650 92C900 108 1080 142 1220 70C1300 30 1368 38 1440 52V160H0V118Z" />
+        </svg>
       </header>
 
-      <div className="border-y border-border bg-secondary/50">
+      <div className="border-b border-border bg-secondary">
         <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
           <AboutCarousel topics={topics} quote={about.quote} />
         </div>
