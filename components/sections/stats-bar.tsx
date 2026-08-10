@@ -44,7 +44,7 @@ function AnimatedStat({
 
 export function StatsBar() {
   return (
-    <section className="border-b border-border bg-background">
+    <section className="relative z-30 -mt-px border-b border-border bg-background sm:mt-0">
       <div
         data-scroll-reveal
         className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 py-14 sm:grid-cols-3"

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-svh items-center overflow-hidden border-b border-border text-primary-foreground md:block md:min-h-0">
+    <section className="relative flex min-h-svh items-center overflow-hidden text-primary-foreground md:block md:min-h-0">
       <div className="animate-hero-fade-in absolute inset-0 z-0">
         <Image
           src="/images/logo_hero_v2.png"
@@ -50,6 +50,15 @@ export function Hero() {
           </Button>
         </div>
       </div>
+
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 1440 160"
+        preserveAspectRatio="none"
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-20 w-full fill-background md:h-28"
+      >
+        <path d="M0 118C220 146 420 78 650 92C900 108 1080 142 1220 70C1300 30 1368 38 1440 52V160H0V118Z" />
+      </svg>
     </section>
   );
 }
