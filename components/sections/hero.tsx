@@ -8,7 +8,7 @@ export function Hero() {
     <section className="relative flex min-h-svh items-center overflow-hidden border-b border-border text-primary-foreground md:block md:min-h-0">
       <div className="animate-hero-fade-in absolute inset-0 z-0">
         <Image
-          src="/images/logo_hero.png"
+          src="/images/logo_hero_v2.png"
           alt=""
           fill
           priority

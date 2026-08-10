@@ -12,7 +12,7 @@ export default function Home() {
       <Hero />
       <StatsBar />
 
-      <section className="border-b border-border bg-background">
+      <section className="relative overflow-hidden bg-background">
         <div
           data-scroll-reveal
           className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 lg:grid-cols-[1fr_22rem]"
@@ -45,15 +45,34 @@ export default function Home() {
             </Link>
           </div>
 
+          <div className="relative mx-auto aspect-square w-52 overflow-hidden rounded-full border-4 border-background bg-secondary shadow-[0_18px_40px_rgba(4,34,59,0.2)] ring-1 ring-border md:hidden">
+            <Image
+              src="/images/douglas_perfil_v1.png"
+              alt="Douglas Figueredo"
+              fill
+              sizes="13rem"
+              className="object-cover object-center"
+            />
+          </div>
+
           <Image
-            src="/images/douglas_primeira_pagina_v3.png"
+            src="/images/douglas_primeira_pagina_v4.png"
             alt="Douglas Figueredo"
-            width={1165}
-            height={1014}
-            className="mx-auto w-full max-w-sm"
+            width={816}
+            height={1302}
+            className="mx-auto hidden w-full max-w-sm drop-shadow-[0_18px_26px_rgba(4,34,59,0.18)] [-webkit-mask-image:linear-gradient(to_bottom,#000_0%,#000_82%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_0%,#000_82%,transparent_100%)] md:block"
             sizes="22rem"
           />
         </div>
+
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 160"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 w-full fill-secondary md:h-36"
+        >
+          <path d="M0 118C220 146 420 78 650 92C900 108 1080 142 1220 70C1300 30 1368 38 1440 52V160H0V118Z" />
+        </svg>
       </section>
 
       <section className="bg-secondary">
