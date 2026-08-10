@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { about } from "@/lib/content";
 import {
@@ -54,6 +55,19 @@ export default function SobrePage() {
         data-scroll-reveal
         className="relative overflow-hidden bg-primary text-primary-foreground"
       >
+        <Image
+          src="/images/logo_sobre_v1.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="pointer-events-none object-cover"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-[1] bg-primary/40"
+        />
+
         <div className="relative z-10 mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-28 md:pb-32">
           <p className="text-sm tracking-wide text-primary-foreground/70 uppercase">
             {about.sectionTitle}
