@@ -7,6 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { WhatsappButton } from "@/components/layout/whatsapp-button";
 import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { ScrollReveal } from "@/components/layout/scroll-reveal";
+import { MetaPixel } from "@/components/analytics/meta-pixel";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -53,6 +54,7 @@ export default function RootLayout({
         <main className="flex-1">{children}</main>
         <Footer />
         <WhatsappButton />
+        <MetaPixel />
       </body>
     </html>
   );
