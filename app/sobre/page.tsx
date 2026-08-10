@@ -68,7 +68,7 @@ export default function SobrePage() {
           className="pointer-events-none absolute inset-0 z-[1] bg-primary/40"
         />
 
-        <div className="relative z-10 mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-28 md:pb-32">
+        <div className="relative z-10 mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-44 md:pb-48">
           <p className="text-sm tracking-wide text-primary-foreground/70 uppercase">
             {about.sectionTitle}
           </p>
