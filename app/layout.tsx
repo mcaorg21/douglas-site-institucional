@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import localFont from "next/font/local";
+import { Work_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -9,16 +8,15 @@ import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { ScrollReveal } from "@/components/layout/scroll-reveal";
 import { MetaPixel } from "@/components/analytics/meta-pixel";
 
-const inter = Inter({
+const workSans = Work_Sans({
   variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const surgena = localFont({
-  src: "./fonts/surgena-semibold.ttf",
+const workSansHeading = Work_Sans({
   variable: "--font-heading",
+  subsets: ["latin"],
   weight: "600",
-  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -45,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${inter.variable} ${surgena.variable} h-full antialiased`}
+      className={`${workSans.variable} ${workSansHeading.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <ScrollToTop />
