@@ -194,6 +194,15 @@
   animation: arrow-blink 1.6s ease-in-out infinite;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   [data-scroll-reveal] {
     opacity: 0;
