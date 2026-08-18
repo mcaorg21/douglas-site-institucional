@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -17,6 +17,8 @@ const cardPalettes = [
   "bg-secondary text-secondary-foreground",
 ];
 
+const AUTOPLAY_INTERVAL_MS = 5000;
+
 export function AboutCarousel({
   topics,
   quote,
@@ -26,7 +28,9 @@ export function AboutCarousel({
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const scrollAnimationFrame = useRef<number | undefined>(undefined);
+  const activeIndexRef = useRef(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const total = topics.length + 1;
 
   const easeInOutCubic = (t: number) =>
@@ -36,6 +40,12 @@ export function AboutCarousel({
     const track = trackRef.current;
     const card = track?.children[index] as HTMLElement | undefined;
     if (!track || !card) return;
+
+    // Set directly instead of waiting on the "scroll" event: native scroll
+    // events can be throttled away entirely while the tab isn't visible,
+    // which would otherwise stall autoplay on an unrelated index forever.
+    activeIndexRef.current = index;
+    setActiveIndex(index);
 
     // Chromium's smooth scroll truncates jumps to a distant target when the
     // container has scroll-snap-type: mandatory, so the animation is driven
@@ -69,10 +79,7 @@ export function AboutCarousel({
     step();
   };
 
-  const handleScroll = () => {
-    const track = trackRef.current;
-    if (!track) return;
-
+  const closestIndex = (track: HTMLDivElement) => {
     let closest = 0;
     let closestDistance = Infinity;
     Array.from(track.children).forEach((child, index) => {
@@ -83,11 +90,74 @@ export function AboutCarousel({
         closest = index;
       }
     });
-    setActiveIndex(closest);
+    return closest;
   };
 
+  const handleScroll = () => {
+    const track = trackRef.current;
+    if (!track) return;
+    setActiveIndex(closestIndex(track));
+  };
+
+  const dragState = useRef<{ startX: number; startScrollLeft: number } | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track || event.pointerType === "touch") return;
+
+    dragState.current = { startX: event.clientX, startScrollLeft: track.scrollLeft };
+    track.style.scrollSnapType = "none";
+    track.setPointerCapture(event.pointerId);
+    setIsDragging(true);
+    setIsPaused(true);
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track || !dragState.current) return;
+    track.scrollLeft = dragState.current.startScrollLeft - (event.clientX - dragState.current.startX);
+  };
+
+  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    const track = trackRef.current;
+    if (!track || !dragState.current) return;
+
+    dragState.current = null;
+    track.style.scrollSnapType = "";
+    if (track.hasPointerCapture(event.pointerId)) {
+      track.releasePointerCapture(event.pointerId);
+    }
+    scrollToIndex(closestIndex(track));
+    setIsDragging(false);
+    setIsPaused(false);
+  };
+
+  useEffect(() => {
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
+
+  useEffect(() => {
+    if (isPaused) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const interval = window.setInterval(() => {
+      scrollToIndex((activeIndexRef.current + 1) % total);
+    }, AUTOPLAY_INTERVAL_MS);
+
+    return () => window.clearInterval(interval);
+    // scrollToIndex only reads refs, so it's safe to omit from deps here.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPaused, total]);
+
   return (
-    <section aria-label="Tópicos sobre Douglas Figueredo">
+    <section
+      aria-label="Tópicos sobre Douglas Figueredo"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={() => setIsPaused(false)}
+    >
       <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
         <div>
           <p className="text-sm tracking-wide text-muted-foreground uppercase">
@@ -123,7 +193,15 @@ export function AboutCarousel({
       <div
         ref={trackRef}
         onScroll={handleScroll}
-        className="no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        className={cn(
+          "no-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2 cursor-grab touch-pan-y active:cursor-grabbing",
+          isDragging && "select-none",
+        )}
       >
         {topics.map((topic, index) => (
           <article
