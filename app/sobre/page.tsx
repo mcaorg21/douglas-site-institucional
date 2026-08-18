@@ -72,7 +72,7 @@ export default function SobrePage() {
           <p className="text-sm tracking-wide text-primary-foreground/70 uppercase">
             {about.sectionTitle}
           </p>
-          <h1 className="mt-4 max-w-3xl font-heading text-4xl text-primary-foreground md:text-5xl">
+          <h1 className="mt-4 max-w-3xl font-heading text-4xl font-bold text-primary-foreground md:text-5xl">
             {about.subtitle}
           </h1>
           <p className="mt-8 max-w-3xl text-lg leading-relaxed text-primary-foreground/85">

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { about, practiceAreas, practiceAreasSection } from "@/lib/content";
 import { Hero } from "@/components/sections/hero";
@@ -13,15 +12,12 @@ export default function Home() {
       <StatsBar />
 
       <section className="relative overflow-hidden bg-background">
-        <div
-          data-scroll-reveal
-          className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-24 lg:grid-cols-[1fr_22rem]"
-        >
+        <div data-scroll-reveal className="mx-auto max-w-6xl px-6 py-24">
           <div className="max-w-2xl">
             <p className="text-sm tracking-wide text-muted-foreground uppercase">
               {about.sectionTitle}
             </p>
-            <h2 className="mt-4 font-heading text-3xl text-foreground md:text-4xl">
+            <h2 className="mt-4 font-heading text-3xl font-bold text-foreground md:text-4xl">
               {about.subtitle}
             </h2>
             <p className="mt-6 text-base leading-relaxed text-foreground/85 md:text-lg">
@@ -44,25 +40,6 @@ export default function Home() {
               Saiba mais sobre Douglas Figueredo →
             </Link>
           </div>
-
-          <div className="relative mx-auto aspect-square w-52 overflow-hidden rounded-full border-4 border-background bg-secondary shadow-[0_18px_40px_rgba(4,34,59,0.2)] ring-1 ring-border md:hidden">
-            <Image
-              src="/images/douglas_perfil_v1.png"
-              alt="Douglas Figueredo"
-              fill
-              sizes="13rem"
-              className="object-cover object-center"
-            />
-          </div>
-
-          <Image
-            src="/images/douglas_primeira_pagina_v4.png"
-            alt="Douglas Figueredo"
-            width={816}
-            height={1302}
-            className="mx-auto hidden w-full max-w-sm drop-shadow-[0_18px_26px_rgba(4,34,59,0.18)] [-webkit-mask-image:linear-gradient(to_bottom,#000_0%,#000_82%,transparent_100%)] [mask-image:linear-gradient(to_bottom,#000_0%,#000_82%,transparent_100%)] md:block"
-            sizes="22rem"
-          />
         </div>
 
         <svg
@@ -80,7 +57,7 @@ export default function Home() {
           <p className="text-sm tracking-wide text-muted-foreground uppercase">
             {practiceAreasSection.sectionTitle}
           </p>
-          <h2 className="mt-4 font-heading text-3xl text-foreground md:text-4xl">
+          <h2 className="mt-4 font-heading text-3xl font-bold text-foreground md:text-4xl">
             {practiceAreasSection.subtitle}
           </h2>
 

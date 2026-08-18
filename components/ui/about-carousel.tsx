@@ -30,7 +30,7 @@ export function AboutCarousel({
         <p className="text-sm tracking-wide text-muted-foreground uppercase">
           Perfil profissional
         </p>
-        <h2 className="mt-2 font-heading text-2xl text-primary md:text-3xl">
+        <h2 className="mt-2 font-heading text-2xl font-bold text-primary md:text-3xl">
           Conheça a trajetória
         </h2>
       </div>

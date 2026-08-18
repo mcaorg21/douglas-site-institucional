@@ -11,7 +11,7 @@ export function ContactSection() {
         <p className="text-sm tracking-wide text-primary-foreground/70 uppercase">
           {contact.sectionTitle}
         </p>
-        <h2 className="mt-4 font-heading text-3xl md:text-4xl">
+        <h2 className="mt-4 font-heading text-3xl font-bold md:text-4xl">
           {contact.subtitle}
         </h2>
         <p className="mt-6 text-base text-primary-foreground/80 md:text-lg">

@@ -28,7 +28,7 @@ export default function AreasDeAtuacaoPage() {
           <p className="text-sm tracking-wide text-muted-foreground uppercase">
             {practiceAreasSection.sectionTitle}
           </p>
-          <h1 className="mt-4 font-heading text-4xl text-primary md:text-6xl">
+          <h1 className="mt-4 font-heading text-4xl font-bold text-primary md:text-6xl">
             {practiceAreasSection.intro}
           </h1>
           <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">

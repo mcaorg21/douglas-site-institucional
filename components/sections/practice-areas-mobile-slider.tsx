@@ -76,7 +76,7 @@ export function PracticeAreasMobileSlider({
               {String(areas.length).padStart(2, "0")}
             </p>
 
-            <h2 className="relative z-10 mt-6 break-words font-heading text-3xl leading-tight [overflow-wrap:anywhere]">
+            <h2 className="relative z-10 mt-6 break-words font-heading text-3xl font-bold leading-tight [overflow-wrap:anywhere]">
               {area.title}
             </h2>
             <p className="relative z-10 mt-4 text-base leading-relaxed italic opacity-75">
@@ -119,7 +119,7 @@ export function PracticeAreasMobileSlider({
             </p>
             <h2
               id="area-dialog-title"
-              className="mt-5 pr-8 font-heading text-3xl leading-tight text-primary"
+              className="mt-5 pr-8 font-heading text-3xl font-bold leading-tight text-primary"
             >
               {selectedArea.title}
             </h2>
